@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ball Escape</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="wrapper">
+          <div class="header-content">
+            <div class="logo">Ball &#9917; Escape</div>
+            <div class="controlPan">
+              <button
+                class="controlPan_ctrlBtn controlPan_ctrlBtn__unBorder"
+                id="newGameBtn"
+              >
+                New game
+              </button>
+              <button class="controlPan_ctrlBtn" id="playGameBtn">Play</button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="gameBlock">
+        <div class="wrapper">
+          <canvas id="gameField" width="800" height="200"></canvas>
+          <div class="rules">Press space bar to jump or start the game</div>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="wrapper">
+          <div class="about">by Peter Smolenko</div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/objects/game-object.js"></script>
+    <script src="js/objects/thorn.js"></script>
+    <script src="js/objects/ball.js"></script>
+    <script src="js/objects/background.js"></script>
+    <script src="js/objects/score.js"></script>
+    <script src="js/objects/message.js"></script>
+    <script src="js/game.js"></script>
+    <script>
+      let game = null;
+      document
+        .querySelector("#newGameBtn")
+        .addEventListener("click", function (e) {
+          game = new Game({
+            el: document.getElementById("gameField"),
+          });
+          document.querySelector("#playGameBtn").textContent = "Play";
+          document.querySelector("#playGameBtn").disabled = false;
+          this.blur();
+        });
+      document
+        .querySelector("#playGameBtn")
+        .addEventListener("click", function (e) {
+          game.running = !game.running;
+          this.textContent = game.running ? "Pause" : "Play";
+          this.blur();
+        });
+      game = new Game({
+        el: document.getElementById("gameField"),
+      });
+    </script>
+  </body>
+</html>
